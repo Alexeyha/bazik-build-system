@@ -13,6 +13,7 @@ class TaskExecutorImpl : TaskExecutor {
         val outputs = task.deps.map {
             taskDep -> executedTasksToOutput[taskDep.taskName]
         }.joinToString(" ")
+        executedTasksToOutput[task.name] = task.output
         return task.action.replace("{srcs}", srcs).replace("{deps}", outputs)
     }
 
