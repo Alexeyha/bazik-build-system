@@ -1,7 +1,6 @@
 package task.handler
 
 import task.Task
-import task.TaskType
 
 class TaskHandler {
 
@@ -9,8 +8,8 @@ class TaskHandler {
 
         fun buildTaskAndDepsPaths(
             name: String,
-            taskType: TaskType,
-            action: () -> Unit,
+            taskType: Task.Companion.TaskType,
+            action: String,
             srcs: List<String> = emptyList(),
             deps: List<String>
         ) : Pair<Task, List<String>> {
@@ -19,7 +18,7 @@ class TaskHandler {
             for (dependency in deps) {
                 val parsedDependency = parseDependency(dependency)
                 depsList.add(parsedDependency)
-                depsPathList.add(parsedDependency.path)
+                if (parsedDependency.path != "") depsPathList.add(parsedDependency.path)
             }
             return Pair(Task(name, taskType, action, srcs, depsList), depsPathList)
         }

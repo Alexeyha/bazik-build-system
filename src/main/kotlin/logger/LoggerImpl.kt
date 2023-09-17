@@ -1,4 +1,0 @@
-package logger
-
-class LoggerImpl {
-}

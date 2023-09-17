@@ -1,0 +1,18 @@
+{
+  "tasks": [
+    {
+      "name" : "compile_1",
+      "task_type" : "compile",
+      "action" : "cd bazik_build",
+      "srcs" : [],
+      "deps" : ["build.json:compile", "build.json:run"]
+    },
+    {
+      "name" : "run_1",
+      "task_type" : "script",
+      "action" : "mkdir bazik_build_1",
+      "srcs" : [],
+      "deps" : [":compile_1"]
+    }
+  ]
+}

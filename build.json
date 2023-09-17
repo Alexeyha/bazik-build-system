@@ -3,14 +3,16 @@
     {
       "name" : "compile",
       "task_type" : "compile",
+      "action" : "echo 123",
       "srcs" : [],
-      "deps" : ["foo", "bar"]
+      "deps" : []
     },
     {
       "name" : "run",
       "task_type" : "script",
+      "action" : "mkdir bazik_build",
       "srcs" : [],
-      "deps" : ["zpp"]
+      "deps" : [":compile"]
     }
   ]
 }

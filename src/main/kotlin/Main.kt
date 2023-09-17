@@ -1,6 +1,9 @@
+import graph.GraphNodes
+import graph.builder.GraphBuilderImpl
+import logger.Logger
 import parser.JsonParser
-import task.Task
-import java.io.File
+import runner.Runner
+import task.executor.TaskExecutorImpl
 
 //val task_compile = Task(
 //    name = "compile",
@@ -25,5 +28,13 @@ fun main() {
 //    val nameToTask: Map<String, Task> = tasks.associateBy { task -> task.name }
 
     val parser = JsonParser()
-//    parser.parse("build.json")
+    val graphBuilder = GraphBuilderImpl()
+    val graph = GraphNodes()
+    val taskExecutor = TaskExecutorImpl()
+    Logger.get().setFileAndLevel(levelStr = "debug")
+    val runner = Runner(parser, graphBuilder, graph, taskExecutor)
+    runner.parseTarget("build_1.json:run_1")
+    runner.buildGraphOfTasks()
+    runner.renderEntireGraph("graph.txt")
+    runner.executeTasks()
 }

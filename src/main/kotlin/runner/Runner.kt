@@ -1,16 +1,17 @@
 package runner
 
+import graph.Graph
 import graph.builder.GraphBuilder
 import parser.Parser
 import task.Task
 import task.executor.TaskExecutor
+import logger.Logger
 import java.util.LinkedList
 import java.util.Queue
 import java.util.TreeSet
-import java.util.logging.Logger
 
 class Runner(private val parser: Parser, private val graphBuilder: GraphBuilder,
-            private val taskExecutor: TaskExecutor, private val logger: Logger) {
+             private val graph: Graph, private val taskExecutor: TaskExecutor) {
 
     private val usedBuildFilesSet: TreeSet<String> = TreeSet()
     private val filesQueue: Queue<String> = LinkedList()
@@ -19,6 +20,7 @@ class Runner(private val parser: Parser, private val graphBuilder: GraphBuilder,
     private var targetTask: String? = null
 
     fun parseTarget(fullPathTask: String) {
+        Logger.get().debug("Start parseTarget")
         val tasksList = mutableListOf<Task>()
 
         if (!fullPathTask.contains(":")) {
@@ -37,5 +39,21 @@ class Runner(private val parser: Parser, private val graphBuilder: GraphBuilder,
         }
         tasks = tasksList.associateBy { task -> task.name }
         targetTask = taskName
+    }
+
+    fun buildGraphOfTasks() {
+        Logger.get().debug("Start buildGraphOfTask")
+        graphBuilder.buildGraph(graph, tasks)
+    }
+
+    fun executeTasks() {
+        if (targetTask == null) throw IllegalStateException("Target task is null, try to run parseTarget")
+        if (!tasks.containsKey(targetTask)) throw IllegalStateException("Target task $targetTask not found")
+        val tasksQueue = graph.buildQueueOfTasks(tasks[targetTask]!!)
+        taskExecutor.executeTasks(tasksQueue)
+    }
+
+    fun renderEntireGraph(filePath: String) {
+        graph.renderEntireGraphInFile(filePath)
     }
 }

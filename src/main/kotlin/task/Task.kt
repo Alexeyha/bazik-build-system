@@ -4,7 +4,7 @@ import java.lang.IllegalArgumentException
 
 class Task(val name: String,
            val taskType: TaskType,
-           val action: () -> Unit,
+           val action: String,
            val srcs: List<String> = emptyList(),
            val deps: List<Dependency> = emptyList()
 ) {

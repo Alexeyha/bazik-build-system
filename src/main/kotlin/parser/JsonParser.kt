@@ -23,11 +23,12 @@ class JsonParser : Parser {
             val taskJson = taskJsonAny as JSONObject
             val taskType = Task.getTaskTypeByString(taskJson.getString("task_type"))
             val name = taskJson.getString("name")
+            val action = taskJson.getString("action")
             val srcs = parseJsonArrayOfStrings(taskJson.getJSONArray("srcs"))
             val deps = parseJsonArrayOfStrings(taskJson.getJSONArray("deps"))
 
             val (task, depsPaths) =
-                TaskHandler.buildTaskAndDepsPaths(name, taskType, {}, srcs, deps)
+                TaskHandler.buildTaskAndDepsPaths(name, taskType, action, srcs, deps)
 
             tasksList.add(task)
             depsPathsSet.addAll(depsPaths)
@@ -40,7 +41,6 @@ class JsonParser : Parser {
         val stringList = mutableListOf<String>()
         for (i in 0 ..< jsonArray.length()) {
             stringList.add(jsonArray.getString(i))
-            println(jsonArray.getString(i))
         }
         return stringList
     }
