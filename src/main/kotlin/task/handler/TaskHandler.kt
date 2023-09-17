@@ -6,6 +6,16 @@ class TaskHandler {
 
     companion object {
 
+        /**
+         * Build task and find all files in dependencies.
+         *
+         * @param name
+         * @param taskType
+         * @param action
+         * @param srcs
+         * @param deps
+         * @return pair of task and list of file paths to the files which must be parsed due to dependencies
+         */
         fun buildTaskAndDepsPaths(
             name: String,
             taskType: Task.Companion.TaskType,
