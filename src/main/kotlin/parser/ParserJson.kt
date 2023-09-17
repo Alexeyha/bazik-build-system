@@ -7,7 +7,7 @@ import org.json.JSONObject
 import org.json.JSONArray
 import task.handler.TaskHandler
 
-class JsonParser : Parser {
+class ParserJson : Parser {
     override fun parse(filePath: String) : Pair<List<Task>, Set<String>> {
         val tasksList = mutableListOf<Task>()
         val depsPathsSet = mutableSetOf<String>()
