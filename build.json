@@ -5,14 +5,16 @@
       "task_type" : "compile",
       "action" : "echo 123",
       "srcs" : [],
-      "deps" : []
+      "deps" : [],
+      "output" : ""
     },
     {
       "name" : "run",
       "task_type" : "script",
       "action" : "mkdir bazik_build",
       "srcs" : [],
-      "deps" : [":compile"]
+      "deps" : [":compile"],
+      "output" : ""
     }
   ]
 }

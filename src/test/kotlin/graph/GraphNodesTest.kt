@@ -11,13 +11,13 @@ class GraphNodesTest {
     private val graphNodes = GraphNodes()
 
     private val tasks = mapOf(
-        "compile" to Task("compile", Task.Companion.TaskType.BINARY, "", emptyList(), listOf()),
+        "compile" to Task("compile", Task.Companion.TaskType.BINARY, "", emptyList(), listOf(), ""),
         "compile_1" to Task("compile_1", Task.Companion.TaskType.BINARY, "", emptyList(),
-            listOf(Task.Dependency("compile", ""), Task.Dependency("run", ""))),
+            listOf(Task.Dependency("compile", ""), Task.Dependency("run", "")), ""),
         "run" to Task("run", Task.Companion.TaskType.BINARY, "", emptyList(),
-            listOf(Task.Dependency("compile", ""))),
+            listOf(Task.Dependency("compile", "")), ""),
         "run_1" to Task("run_1", Task.Companion.TaskType.BINARY, "", emptyList(),
-            listOf(Task.Dependency("compile_1", "")))
+            listOf(Task.Dependency("compile_1", "")), "")
     )
 
     @Test

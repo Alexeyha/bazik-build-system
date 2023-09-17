@@ -6,7 +6,8 @@ class Task(val name: String,
            val taskType: TaskType,
            val action: String,
            val srcs: List<String> = emptyList(),
-           val deps: List<Dependency> = emptyList()
+           val deps: List<Dependency> = emptyList(),
+           val output: String
 ) {
 
     companion object {

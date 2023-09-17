@@ -16,14 +16,16 @@ class ParserJsonTest {
               "task_type" : "compile",
               "action" : "cd bazik_build",
               "srcs" : [],
-              "deps" : ["build.json:compile", "build.json:run"]
+              "deps" : ["build.json:compile", "build.json:run"],
+              "output" : ""
             },
             {
               "name" : "run_1",
               "task_type" : "script",
               "action" : "mkdir bazik_build_1",
               "srcs" : ["Class.kt"],
-              "deps" : [":compile_1"]
+              "deps" : [":compile_1"],
+              "output" : ""
             }
           ]
         }
@@ -38,10 +40,9 @@ class ParserJsonTest {
             val expectedTasks = listOf(
                 Task("compile_1", Task.Companion.TaskType.BINARY, "cd bazik_build", emptyList(),
                     listOf(Task.Dependency("compile", "build.json"),
-                        Task.Dependency("run", "build.json"))),
+                        Task.Dependency("run", "build.json")), ""),
                 Task("run_1", Task.Companion.TaskType.SCRIPT, "mkdir bazik_build_1", listOf("Class.kt"),
-                    listOf(Task.Dependency("compile_1", ""))
-                )
+                    listOf(Task.Dependency("compile_1", "")), "")
             )
             val expectedDeps = setOf("build.json")
             val (outputTasks, outputsDeps) = parserJson.parse(jsonFile.absolutePath)
@@ -53,6 +54,7 @@ class ParserJsonTest {
                 assertEquals(expectedTasks[i].action, outputTasks[i].action)
                 assertEquals(expectedTasks[i].srcs, outputTasks[i].srcs)
                 assertEquals(expectedTasks[i].deps, outputTasks[i].deps)
+                assertEquals(expectedTasks[i].output, outputTasks[i].output)
             }
             assertEquals(expectedDeps, outputsDeps)
 

@@ -26,9 +26,10 @@ class ParserJson : Parser {
             val action = taskJson.getString("action")
             val srcs = parseJsonArrayOfStrings(taskJson.getJSONArray("srcs"))
             val deps = parseJsonArrayOfStrings(taskJson.getJSONArray("deps"))
+            val output = taskJson.getString("output")
 
             val (task, depsPaths) =
-                TaskHandler.buildTaskAndDepsPaths(name, taskType, action, srcs, deps)
+                TaskHandler.buildTaskAndDepsPaths(name, taskType, action, srcs, deps, output)
 
             tasksList.add(task)
             depsPathsSet.addAll(depsPaths)

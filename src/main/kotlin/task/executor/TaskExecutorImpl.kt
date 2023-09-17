@@ -5,9 +5,8 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import kotlin.io.path.createTempFile
 
-
 class TaskExecutorImpl : TaskExecutor {
-    val executedTasksToOutput = mutableMapOf<String, String>()
+    private val executedTasksToOutput = mutableMapOf<String, String>()
 
     private fun getTaskAction(task: Task) : String {
         val srcs = task.srcs.joinToString(separator = " ")

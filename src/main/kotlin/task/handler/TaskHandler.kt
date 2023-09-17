@@ -21,7 +21,8 @@ class TaskHandler {
             taskType: Task.Companion.TaskType,
             action: String,
             srcs: List<String> = emptyList(),
-            deps: List<String>
+            deps: List<String>,
+            output: String
         ) : Pair<Task, List<String>> {
             val depsList = mutableListOf<Task.Dependency>()
             val depsPathList = mutableListOf<String>()
@@ -30,7 +31,7 @@ class TaskHandler {
                 depsList.add(parsedDependency)
                 if (parsedDependency.path != "") depsPathList.add(parsedDependency.path)
             }
-            return Pair(Task(name, taskType, action, srcs, depsList), depsPathList)
+            return Pair(Task(name, taskType, action, srcs, depsList, output), depsPathList)
         }
 
         private fun parseDependency(dependency: String) : Task.Dependency {
