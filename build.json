@@ -1,0 +1,16 @@
+{
+  "tasks": [
+    {
+      "name" : "compile",
+      "task_type" : "compile",
+      "srcs" : [],
+      "deps" : ["foo", "bar"]
+    },
+    {
+      "name" : "run",
+      "task_type" : "script",
+      "srcs" : [],
+      "deps" : ["zpp"]
+    }
+  ]
+}
