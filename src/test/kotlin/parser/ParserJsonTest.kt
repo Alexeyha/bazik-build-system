@@ -6,9 +6,9 @@ import kotlin.test.assertEquals
 import kotlin.io.path.createTempFile
 
 class ParserJsonTest {
-    val parserJson = ParserJson()
+    private val parserJson = ParserJson()
 
-    val jsonData = """
+    private val jsonData = """
         {
           "tasks": [
             {
