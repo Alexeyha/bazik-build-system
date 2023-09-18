@@ -14,7 +14,7 @@ class ParserJson : Parser {
 
         val file = File(filePath)
         if (!file.exists() || !file.isFile) {
-            throw IllegalArgumentException("Build (build.json) file does not exist in the path: $filePath")
+            throw IllegalArgumentException("Build file does not exist in the path: $filePath")
         }
 
         val json = JSONObject(file.readText())

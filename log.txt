@@ -1,0 +1,6 @@
+[DEBUG] - Runner starts executeTasks
+[DEBUG] - Start parseTarget
+[DEBUG] - Get tasks by target and associate them by their name
+[DEBUG] - Start buildGraphOfTask
+[DEBUG] - GraphBuilder starts buildGraph
+[DEBUG] - Runner starts executeTasks

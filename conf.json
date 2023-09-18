@@ -1,0 +1,12 @@
+{
+  "target_task" : "build_1.json:run_1",
+  "graph" : {
+    "render" : true,
+    "file" : "graph.txt"
+  },
+  "logger" : {
+    "log" : true,
+    "level" : "debug",
+    "file" : "log.txt"
+  }
+}

@@ -1,3 +1,4 @@
+import configuration.ConfigurationJson
 import graph.GraphNodes
 import graph.builder.GraphBuilderImpl
 import logger.Logger
@@ -6,14 +7,24 @@ import runner.Runner
 import task.executor.TaskExecutorImpl
 
 fun main() {
-    val parser = ParserJson()
-    val graphBuilder = GraphBuilderImpl()
-    val graph = GraphNodes()
-    val taskExecutor = TaskExecutorImpl()
-    Logger.get().setFileAndLevel(levelStr = "debug")
-    val runner = Runner(parser, graphBuilder, graph, taskExecutor)
-    runner.parseTarget("build_1.json:run_1")
-    runner.buildGraphOfTasks()
-    runner.renderEntireGraph("graph.txt")
-    runner.executeTasks()
+    try {
+        val configuration = ConfigurationJson("conf.json")
+        val parser = ParserJson()
+        val graphBuilder = GraphBuilderImpl()
+        val graph = GraphNodes()
+        val taskExecutor = TaskExecutorImpl()
+        Logger.get().setFileAndLevel(levelStr = configuration.getLevelAndFileLogger().first,
+            logFilePath = configuration.getLevelAndFileLogger().second)
+
+        val runner = Runner(parser, graphBuilder, graph, taskExecutor)
+        
+        runner.parseTarget(configuration.getTargetTask())
+        runner.buildGraphOfTasks()
+        if (configuration.isGraphRender()) {
+            runner.renderEntireGraph(configuration.getGraphFile()!!)
+        }
+        runner.executeTasks()
+    } catch (e : Exception) {
+        println("Exception : ${e.message}")
+    }
 }

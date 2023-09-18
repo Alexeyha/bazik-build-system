@@ -44,7 +44,7 @@ class Logger private constructor() {
     private fun log(logLevel: LogLevel, message: String) {
         if (logLevel >= level) {
             if (file != null) {
-                file!!.writeText("[$logLevel] - $message\n")
+                file!!.appendText("[$logLevel] - $message\n")
             } else {
                 println("[$logLevel] - $message")
             }
